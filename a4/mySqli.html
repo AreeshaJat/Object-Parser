@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+
+<body style="color: #494c4e;">
+    <p>&lt;?php</p>
+    <p>&nbsp; &nbsp; // create strings to identif and access they database and server<br>$username =
+        "cis2750";<br>$password = "TempPass";<br>$database = "cis2750";<br>$server = "dursley.socs.uoguelph.ca";</p>
+    <p>&nbsp; &nbsp; // create connection to the database<br>$conn = new mysqli($server, $username, $password,
+        $database);</p>
+    <p>&nbsp; &nbsp; // check connection<br>if ($conn-&gt;connect_error) {<br>&nbsp; die("Connection failed: " .
+        $conn-&gt;connect_error);<br>}<br>echo "connected successfully &lt;BR&gt;";</p>
+    <p><br>// create a table named students<br>$sql = &nbsp;"create table students (id int not null
+        auto_increment,<br>&nbsp; &nbsp; &nbsp; &nbsp; last_name char(15),<br>&nbsp; &nbsp; &nbsp; &nbsp; first_name
+        char(15),<br>&nbsp; &nbsp; &nbsp; &nbsp; mark char(2),<br>&nbsp; &nbsp; &nbsp; &nbsp; primary key(id) )";</p>
+    <p>if ($conn-&gt;query($sql) === TRUE) {<br>&nbsp; echo "Table students created successfully &lt;BR&gt;";<br>} else
+        {<br>&nbsp; echo "Error creating table: " . $conn-&gt;error;<br>}</p>
+    <p></p>
+    <p>// insert records into the student table</p>
+    <p>// create array of insert operations which enter the records into the table<br>$sql = array( "insert into
+        students values (1,'Hugo','Victor','B+')" );<br>array_push($sql, &nbsp;"insert into students values
+        (4,'Rudin','Walter','A-')" );<br>array_push($sql, "insert into students values (5,'Stevens','Richard','C')" );
+    </p>
+    <p>// for each record insert it into the table named students<br>for ($i=0; $i&lt;3; $i++) {<br>&nbsp; &nbsp;if
+        ($conn-&gt;query($sql[$i]) === TRUE) {<br>&nbsp; &nbsp; &nbsp;echo "New record created successfully $i
+        &lt;BR&gt;";<br>&nbsp; &nbsp;} else {<br>&nbsp; &nbsp; &nbsp;echo "Error: " . $sql . "&lt;br&gt;" .
+        $conn-&gt;error;<br>&nbsp; &nbsp;}<br>}</p>
+    <p><br>// search for records in the table using select<br>$sql = "select * from students order by
+        last_name";<br>$result = mysqli_query($conn, $sql);</p>
+    <p>// for each row in the result from the select, display each element<br>if (mysqli_num_rows($result) &gt; 0)
+        {<br>&nbsp; // output data of each row<br>&nbsp; while($row = mysqli_fetch_assoc($result)) {<br>&nbsp; &nbsp;
+        echo "id: " . $row["id"]. " - Name: " . $row["first_name"]. " " . $row["last_name"] . " - Mark: " . $row["mark"]
+        . &nbsp;"&lt;br&gt;";<br>&nbsp; }<br>} else {<br>&nbsp; echo "0 results";<br>}</p>
+    <p><br>// drop table<br>$sql = &nbsp;"drop table students";</p>
+    <p>if ($conn-&gt;query($sql) === TRUE) {<br>&nbsp; echo "Table students dropped successfully &lt;BR&gt;";<br>} else
+        {<br>&nbsp; echo "Error dropping table: " . $conn-&gt;error;<br>}</p>
+    <p><br>&nbsp; &nbsp; // close connection to the database<br>mysqli_close($conn);</p>
+    <p>?&gt;</p>
+</body>
+
+</html>
