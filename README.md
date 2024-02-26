@@ -61,7 +61,11 @@ Choose Files only chooses the file, does not display.
 # How to run the program:
 Start off by ssh'ing into cis2750.socs.uoguelph.ca. On the linux school server make sure you are in the correct 
 directory. The correct directory is /srv/'your username' directory.
+
 After you have done that, run the following commands:
+
 make clean
+
 make
+
 Go to google chrome and input the following url: "https://cis2750.socs.uoguelph.ca/~ajat/index.php"
