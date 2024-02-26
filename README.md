@@ -56,7 +56,7 @@ With the Transfer button the user must select 2 files together in order for the 
 enters the files individually it will not work. 
 Choose Files only chooses the file, does not display.
 
-## NOTE: "Go home" button is the "return" button. 
+### NOTE: "Go home" button is the "return" button. 
 
 # How to run the program:
 Start off by ssh'ing into cis2750.socs.uoguelph.ca. On the linux school server make sure you are in the correct 
